@@ -3,6 +3,7 @@ import cors from "cors";
 import helmet from "helmet";
 import dotenv from "dotenv";
 import { authenticate } from "./middlewares/auth.ts";
+import barbersRouter from "./routes/barbers.ts";
 
 dotenv.config();
 
@@ -21,6 +22,8 @@ app.get("/health", (req, res) => {
 })
 
 app.use(authenticate);
+
+app.use("/api/barbers", barbersRouter);
 
 app.listen(process.env.PORT || 3001, () => {
   console.log(`Server running on port ${process.env.PORT || 3001}`);
