@@ -55,7 +55,7 @@ coverage/
 **/coverage/
 
 data/*.json
-backend/data/*.json
+backend/src/data/*.json
 
 # Misc
 *.orig
