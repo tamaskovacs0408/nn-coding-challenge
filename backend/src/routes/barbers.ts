@@ -1,5 +1,5 @@
 import { Router } from "express";
-import fetchBarbers from "../services/barberService.ts";
+import fetchBarbers from "../services/barberService.js";
 
 const router = Router();
 

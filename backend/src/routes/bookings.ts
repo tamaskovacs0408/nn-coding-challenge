@@ -3,7 +3,7 @@ import {
   createBooking,
   deleteBooking,
   getBookingsByEmail,
-} from "../services/bookingService.ts";
+} from "../services/bookingService.js";
 
 const router = Router();
 

@@ -2,8 +2,8 @@ import { readFile, writeFile } from "fs/promises";
 import { randomUUID } from "crypto";
 import { fileURLToPath } from "url";
 import { join, dirname } from "path";
-import fetchBarbers from "./barberService.ts";
-import type { WorkSchedule } from "./barberService.ts";
+import fetchBarbers from "./barberService.js";
+import type { WorkSchedule } from "./barberService.js";
 
 interface Booking {
   id: string;

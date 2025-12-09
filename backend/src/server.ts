@@ -2,9 +2,9 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import dotenv from "dotenv";
-import { authenticate } from "./middlewares/auth.ts";
-import barbersRouter from "./routes/barbers.ts";
-import bookingsRouter from "./routes/bookings.ts";
+import { authenticate } from "./middlewares/auth.js";
+import barbersRouter from "./routes/barbers.js";
+import bookingsRouter from "./routes/bookings.js";
 
 dotenv.config();
 
