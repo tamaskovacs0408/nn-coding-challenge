@@ -58,7 +58,7 @@ export async function createBooking(bookingData: {email: string, barberId: strin
   const bookingConflict = bookings.some((booking) => booking.barberId === barberId && booking.date === date && booking.time === time);
 
   if (isNaN(bookingDate.getTime())) throw new Error("Invalid datetime");
-  if (bookingDate <= new Date()) throw new Error("Past date");
+  if (bookingDate <= new Date()) throw new Error("Cannot book for past date");
   if (bookingConflict) throw new Error("Time slot already booked");
 
   const dayIndex = bookingDate.getDay();
