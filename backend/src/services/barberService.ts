@@ -3,7 +3,7 @@ interface WorkHours {
   end: string;
 }
 
-interface WorkSchedule {
+export interface WorkSchedule {
   monday: WorkHours;
   tuesday: WorkHours;
   wednesday: WorkHours;
