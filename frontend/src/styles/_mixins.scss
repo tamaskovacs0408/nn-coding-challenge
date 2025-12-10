@@ -1,0 +1,20 @@
+@use "@/styles/_variables" as v;
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == md {
+    @media (min-width: v.$bp-md) { @content; }
+  }
+  @if $breakpoint == lg {
+    @media (min-width: v.$bp-lg) { @content; }
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin card-shadow {
+  box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+}
