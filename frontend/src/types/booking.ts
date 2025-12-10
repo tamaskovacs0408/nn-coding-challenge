@@ -4,4 +4,5 @@ export type Booking = {
   barberId: string;
   date: string;
   time: string;
+  barberName?: string;
 }
