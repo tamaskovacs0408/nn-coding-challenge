@@ -1,0 +1,67 @@
+@use "../styles/variables" as v;
+@use "../styles/mixins" as m;
+
+.home {
+  max-width: v.$container-max-width;
+  margin: 0 auto;
+  padding: 2rem;
+
+  &__hero {
+    text-align: center;
+    margin-bottom: 3rem;
+
+    .home__title {
+      font-size: 2.5rem;
+      color: v.$color-text;
+
+      @include m.respond(md) {
+        font-size: 3rem;
+      }
+    }
+
+    .home__subtitle {
+      margin-top: 0.5rem;
+      opacity: 0.8;
+      color: v.$color-text;
+    }
+
+    .home__cta {
+      display: inline-block;
+      background-color: v.$color-accent;
+      padding: 0.75rem 2rem;
+      border-radius: 8px;
+      margin-top: 1.5rem;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.2s ease;
+
+      &:hover {
+        background-color: v.$color-accent-hover;
+      }
+    }
+  }
+
+  &__features {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+
+    @include m.respond(md) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    
+  }
+
+  &__actions {
+    display: grid;
+    gap: 1.5rem;
+
+    @include m.respond(md) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+  }
+}
