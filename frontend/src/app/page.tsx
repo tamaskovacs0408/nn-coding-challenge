@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Scissors, Calendar, Clock, Star } from "lucide-react";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import FeatureCard from "@/components/landing/FeatureCard";
 import ActionCard from "@/components/landing/ActionCard";
 import "./home.scss";
@@ -35,7 +34,7 @@ export default function HomePage() {
         <ActionCard
           title='Foglalásaim'
           btnTitle='Foglalások megtekintése'
-          url='/barbers'
+          url='/bookings'
         />
       </section>
     </main>
