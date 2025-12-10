@@ -7,6 +7,9 @@
   @if $breakpoint == lg {
     @media (min-width: v.$bp-lg) { @content; }
   }
+  @if $breakpoint == xl {
+    @media (min-width: v.$bp-lg) { @content; }
+  }
 }
 
 @mixin flex-center {
