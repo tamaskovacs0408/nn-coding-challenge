@@ -1,4 +1,5 @@
 import express from "express";
+import type { Request, Response, NextFunction } from "express";
 import cors from "cors";
 import helmet from "helmet";
 import dotenv from "dotenv";
@@ -18,13 +19,50 @@ app.get("/health", (req, res) => {
   res.status(200).json({
     status: "ok",
     timestamp: new Date().toISOString(),
-    service: "nn-coding-challenge-backend"
-  })
-})
+    service: "nn-coding-challenge-backend",
+  });
+});
 
 app.use(authenticate);
 
 app.use("/api/barbers", barbersRouter);
 app.use("/api/booking", bookingsRouter);
+
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+  console.error(err);
+
+  if (err.message === "Invalid email") {
+    return res.status(400).json({ message: err.message });
+  }
+
+  if (err.message === "Invalid barberId") {
+    return res.status(400).json({ message: err.message });
+  }
+
+  if (err.message === "Invalid datetime") {
+    return res.status(400).json({ message: err.message });
+  }
+
+  if (err.message === "Cannot book for past date") {
+    return res.status(400).json({ message: err.message });
+  }
+
+  if (err.message === "Barber not found") {
+    return res.status(404).json({ message: err.message });
+  }
+
+  if (err.message === "Barber does not work on this day") {
+    return res.status(400).json({ message: err.message });
+  }
+
+  if (err.message === "Time outside of barber's working hours") {
+    return res.status(400).json({ message: err.message });
+  }
+
+  if (err.message === "Time slot already booked") {
+    return res.status(409).json({ message: err.message });
+  }
+  return res.status(500).json({ message: "Internal server error" });
+});
 
 export default app;
