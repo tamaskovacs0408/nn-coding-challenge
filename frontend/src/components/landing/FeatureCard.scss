@@ -1,0 +1,20 @@
+@use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
+
+.feature-card {
+  background-color: v.$color-card;
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+  color: v.$color-text;
+
+  @include m.card-shadow;
+
+  &__header {
+    @include m.flex-center-col;
+
+    svg {
+      color: v.$color-accent;
+    }
+  }
+}
