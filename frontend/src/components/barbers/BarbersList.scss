@@ -1,0 +1,64 @@
+@use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
+
+.barbers-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  padding: 2rem;
+  width: 80%;
+
+  @include m.respond(md) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  &__card {
+    background: v.$color-card;
+    padding: 1.5rem;
+    border-radius: 12px;
+    @include m.card-shadow;
+    color: v.$color-text;
+  }
+
+  &__name {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: v.$color-accent;
+    text-align: center;
+  }
+
+  &__hours-label {
+    margin-bottom: 0.5rem;
+    opacity: 0.85;
+  }
+
+  &__hours {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem 0;
+
+    &-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.25rem 0;
+      opacity: 0.9;
+    }
+  }
+
+  &__cta {
+    display: inline-block;
+    margin: 0 auto;
+    margin-top: 1rem;
+    background-color: v.$color-accent;
+    padding: 0.6rem 1.2rem;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: 0.2s;
+
+    &:hover {
+      background-color: v.$color-accent-hover;
+    }
+  }
+}
