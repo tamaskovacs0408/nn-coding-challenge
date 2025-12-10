@@ -6,6 +6,8 @@ import dotenv from "dotenv";
 import { authenticate } from "./middlewares/auth.js";
 import barbersRouter from "./routes/barbers.js";
 import bookingsRouter from "./routes/bookings.js";
+import swaggerUi from "swagger-ui-express";
+import { swaggerSpec } from "./swagger.js";
 
 dotenv.config();
 
@@ -22,6 +24,8 @@ app.get("/health", (req, res) => {
     service: "nn-coding-challenge-backend",
   });
 });
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use(authenticate);
 
