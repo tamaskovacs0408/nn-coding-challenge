@@ -51,6 +51,14 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
     return res.status(400).json({ message: err.message });
   }
 
+  if (err.message === "Cannot book on holidays") {
+    return res.status(400).json({ message: err.message });
+  }
+
+  if (err.message === "Cannot book on Sundays") {
+    return res.status(400).json({ message: err.message });
+  }
+
   if (err.message === "Barber not found") {
     return res.status(404).json({ message: err.message });
   }
