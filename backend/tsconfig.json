@@ -11,13 +11,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "allowImportingTsExtensions": true,
+    "allowImportingTsExtensions": true
   },
-  "include": ["src/**/*"],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "tests",
-    "**/*.test.ts"
-  ]
+  "include": ["src/**/*", "src/swagger.ts"],
+  "exclude": ["node_modules", "dist", "tests", "**/*.test.ts"]
 }
