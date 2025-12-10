@@ -3,6 +3,7 @@ import { randomUUID } from "crypto";
 import { fileURLToPath } from "url";
 import { join, dirname } from "path";
 import fetchBarbers from "./barberService.js";
+import holidays from "../data/holidays.json" with { type: "json"};
 import type { WorkSchedule } from "./barberService.js";
 
 interface Booking {
@@ -17,7 +18,15 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const filePath = join(__dirname, "../data/bookings.json");
 
-const WEEKDAYS: (keyof WorkSchedule)[] = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+const WEEKDAYS: (keyof WorkSchedule)[] = [
+  "sunday",
+  "monday",
+  "tuesday",
+  "wednesday",
+  "thursday",
+  "friday",
+  "saturday",
+];
 
 export async function loadBookings(): Promise<Booking[]> {
   try {
@@ -27,12 +36,12 @@ export async function loadBookings(): Promise<Booking[]> {
     if (error.code === "ENOENT") {
       return [];
     }
-    
+
     if (error instanceof SyntaxError) {
       console.error("Corrupted bookings.json, falling back to empty list");
       return [];
     }
-    
+
     throw error;
   }
 }
@@ -42,20 +51,39 @@ export async function saveBookings(bookings: Booking[]): Promise<void> {
   await writeFile(filePath, bookingContent, "utf-8");
 }
 
-export async function createBooking(bookingData: {email: string, barberId: string, date: string, time: string}): Promise<Booking> {
+export async function createBooking(bookingData: {
+  email: string;
+  barberId: string;
+  date: string;
+  time: string;
+}): Promise<Booking> {
   const bookings = await loadBookings();
   const barbers = await fetchBarbers();
 
   const { email, barberId, date, time } = bookingData;
-  if (!email || !email.includes('@')) throw new Error("Invalid email");
+  if (!email || !email.includes("@")) throw new Error("Invalid email");
   if (!barberId) throw new Error("Invalid barberId");
   if (!date || !time) throw new Error("Invalid datetime");
 
-  const barber = barbers.find((barber) => barber.id === barberId);
+  const barber = barbers.find(barber => barber.id === barberId);
   if (!barber) throw new Error("Barber not found");
 
   const bookingDate = new Date(`${date}T${time}`);
-  const bookingConflict = bookings.some((booking) => booking.barberId === barberId && booking.date === date && booking.time === time);
+  const bookingConflict = bookings.some(
+    booking =>
+      booking.barberId === barberId &&
+      booking.date === date &&
+      booking.time === time
+  );
+
+  if (holidays.includes(date)) {
+    throw new Error("Cannot book on holidays")
+  }
+
+  const weekday = bookingDate.getDay();
+  if (weekday === 0) {
+    throw new Error("Cannot book on Sundays")
+  }
 
   if (isNaN(bookingDate.getTime())) throw new Error("Invalid datetime");
   if (bookingDate <= new Date()) throw new Error("Cannot book for past date");
@@ -66,14 +94,15 @@ export async function createBooking(bookingData: {email: string, barberId: strin
   const workSchedule = barber.workSchedule[dayName];
 
   if (!workSchedule) throw new Error("Barber does not work on this day");
-  if (time < workSchedule.start || time >= workSchedule.end) throw new Error("Time outside of barber's working hours");
+  if (time < workSchedule.start || time >= workSchedule.end)
+    throw new Error("Time outside of barber's working hours");
 
   const newBooking: Booking = {
     id: randomUUID(),
     email,
     barberId,
     date,
-    time
+    time,
   };
 
   bookings.push(newBooking);
@@ -88,7 +117,7 @@ export async function getBookingsByEmail(email: string): Promise<Booking[]> {
 
   const bookings = await loadBookings();
 
-  return bookings.filter((booking) => booking.email === email);
+  return bookings.filter(booking => booking.email === email);
 }
 
 export async function deleteBooking(id: string): Promise<void> {
@@ -96,11 +125,11 @@ export async function deleteBooking(id: string): Promise<void> {
 
   const bookings = await loadBookings();
 
-  const existedBooking = bookings.some((booking) => booking.id === id);
+  const existedBooking = bookings.some(booking => booking.id === id);
 
   if (!existedBooking) throw new Error("Booking not found");
 
-  const updatedBookings = bookings.filter((booking) => booking.id !== id);
+  const updatedBookings = bookings.filter(booking => booking.id !== id);
 
   await saveBookings(updatedBookings);
 }
