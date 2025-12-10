@@ -38,7 +38,7 @@ export default function BarbersList({ barbers }: { barbers: Barber[] }) {
             </ul>
 
             <Link
-              href={`/booking?barberId=${barber.id}`}
+              href={`/bookings/${barber.id}`}
               className="barbers-list__cta"
             >
               Időpont foglalás
