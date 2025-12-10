@@ -1,0 +1,24 @@
+@use "../../styles/variables" as v;
+
+.booking-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  label {
+    color: v.$color-text;
+    opacity: 0.8;
+    font-size: 0.9rem;
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator,
+  input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    opacity: 0.8;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

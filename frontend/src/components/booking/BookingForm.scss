@@ -1,0 +1,16 @@
+@use "../../styles/variables" as v;
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+
+  &__submit {
+    margin-top: 1rem;
+    background: v.$color-accent;
+
+    &:hover {
+      background: v.$color-accent-hover;
+    }
+  }
+}
