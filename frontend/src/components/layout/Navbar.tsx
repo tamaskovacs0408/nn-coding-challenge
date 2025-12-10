@@ -16,35 +16,37 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="navbar">
-      <Link href="/" className="navbar__logo">
-        <Scissors className="navbar__logo-icon" size={22} />
+    <header className='header'>
+      <Link href='/' className='header__logo'>
+        <Scissors className='header__logo-icon' size={22} />
         <span>BookABarber</span>
       </Link>
 
-      <div className="navbar__links">
-        {navLinks.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className={`navbar__link ${
-              pathname === link.href ? "navbar__link--active" : ""
-            }`}
-          >
-            {link.label}
+      <nav className='navbar'>
+        <div className='navbar__links'>
+          {navLinks.map(link => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`navbar__link ${
+                pathname === link.href ? "navbar__link--active" : ""
+              }`}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+
+        <div className='navbar__cta'>
+          <Link href='/bookings'>
+            <Button variant='default'>Foglalás</Button>
           </Link>
-        ))}
-      </div>
+        </div>
 
-      <div className="navbar__cta">
-        <Link href="/bookings">
-          <Button variant="default">Foglalás</Button>
-        </Link>
-      </div>
-
-      <button className="navbar__menu-button">
-        <Scissors size={22} />
-      </button>
-    </nav>
+        <button className='navbar__menu-button'>
+          <Scissors size={22} />
+        </button>
+      </nav>
+    </header>
   );
 }
