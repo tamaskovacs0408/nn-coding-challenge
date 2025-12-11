@@ -3,6 +3,7 @@ import {
   createBooking,
   deleteBooking,
   getBookingsByEmail,
+  loadBookings,
 } from "../services/bookingService.js";
 
 const router = Router();
@@ -74,15 +75,25 @@ router.post("/", async (req, res) => {
  *         description: Internal server error
  */
 router.get("/", async (req, res) => {
-  const { email } = req.query;
+  const { email, barberId, date } = req.query;
 
-  if (!email) {
-    return res.status(400).json({ message: "Email query parameter is reqired" });
+  if (email) {
+    const bookings = await getBookingsByEmail(email as string);
+
+    return res.status(200).json(bookings);
   }
 
-  const bookings = await getBookingsByEmail(email as string);
+  if (barberId) {
+    const bookings = await loadBookings();
+    const filteredBookings = bookings.filter(
+      booking =>
+        booking.barberId === barberId && (!date || booking.date === date)
+    );
 
-  return res.status(200).json(bookings);
+    return res.status(200).json(filteredBookings);
+  }
+
+  return res.status(400).json({ message: "Email or barberId query parameter is required"})
 });
 
 /**
@@ -116,6 +127,6 @@ router.delete("/:id", async (req, res) => {
   await deleteBooking(id);
 
   return res.status(204).send();
-})
+});
 
 export default router;
