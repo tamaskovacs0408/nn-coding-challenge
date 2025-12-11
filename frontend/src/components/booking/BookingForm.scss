@@ -8,6 +8,7 @@
   &__submit {
     margin-top: 1rem;
     background: v.$color-accent;
+    cursor: pointer;
 
     &:hover {
       background: v.$color-accent-hover;
