@@ -1,0 +1,94 @@
+@use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
+
+.booking-page {
+  max-width: v.$container-max-width;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+
+  &__title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: v.$color-text;
+    margin-bottom: .5rem;
+  }
+
+  &__subtitle {
+    color: v.$color-accent;
+    margin-bottom: 2rem;
+  }
+
+  &__search {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  &__input {
+    flex: 1;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  &__card {
+    background: v.$color-card;
+    border-radius: 14px;
+    padding: 1.75rem;
+    border: 1px solid rgba(255,255,255,0.06);
+    position: relative;
+
+    @include m.card-shadow;
+  }
+
+  &__name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: .75rem;
+    color: v.$color-text;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin-bottom: .35rem;
+    color: v.$color-accent;
+  }
+
+  &__label {
+    font-weight: 600;
+    color: v.$color-text;
+  }
+
+  &__delete {
+    color: #cc4a4a;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: .5rem;
+    transition: .2s ease;
+
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+  &__reset {
+    cursor: pointer;
+    color: v.$color-accent;
+    font-size: .9rem;
+    margin-bottom: 1rem;
+
+    &:hover {
+      color: v.$color-accent-hover;
+    }
+  }
+}
