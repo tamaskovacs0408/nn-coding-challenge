@@ -1,3 +1,5 @@
+import { unstable_noStore as noStore } from 'next/cache';
+
 import { getBarbers } from "@/lib/api/barbers";
 import BookingByBarberForm from "@/components/booking/BookingForm";
 import "./bookings.scss";
@@ -7,6 +9,7 @@ export default async function BookingPage({
 }: {
   params: Promise<{ barberId: string }>;
 }) {
+  noStore();
   const { barberId } = await params;
 
   if (!barberId) {
