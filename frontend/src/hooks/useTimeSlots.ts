@@ -23,6 +23,10 @@ export function useTimeSlots(barberId: string, date: string) {
       try {
         setIsLoading(true);
         setError(null);
+        
+        const bookings = await getBookingsByBarber(barberId, date);
+        const alreadyBooked = bookings.map((booking: Booking) => booking.time);
+        setBookedSlots(alreadyBooked);
 
         if (holidays.includes(date)) {
           setAvailableSlots([]);
@@ -32,6 +36,7 @@ export function useTimeSlots(barberId: string, date: string) {
         }
 
         const day = new Date(date).getDay();
+
         if (day === 0) {
           setAvailableSlots([]);
           setBookedSlots([]);
@@ -39,13 +44,33 @@ export function useTimeSlots(barberId: string, date: string) {
           return;
         }
 
-        const bookings = await getBookingsByBarber(barberId, date);
-        const alreadyBooked = bookings.map((booking: Booking) => booking.time);
-        setBookedSlots(alreadyBooked);
 
         const allSlots = generateSlots(OPEN_TIME, CLOSE_TIME);
 
-        const freeSlots = allSlots.filter((slot) => !alreadyBooked.includes(slot));
+        let freeSlots = allSlots.filter((slot) => !alreadyBooked.includes(slot));
+
+        const now = new Date();
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        const selected = new Date(date);
+        selected.setHours(0, 0, 0, 0);
+
+        if (selected.getTime() === today.getTime()) {
+          const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+          freeSlots = freeSlots.filter((slot) => {
+            const [hour, minute] = slot.split(":").map(Number);
+            const slotMinutes = hour * 60 + minute;
+
+            return slotMinutes > currentMinutes
+          })
+
+          if (freeSlots.length === 0) {
+            setError("A mai napra már nincs szabad időpont.")
+          }
+        }
+
         setAvailableSlots(freeSlots);
 
       } catch (err) {
