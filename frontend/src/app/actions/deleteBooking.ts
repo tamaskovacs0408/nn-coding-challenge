@@ -2,12 +2,13 @@
 
 import { deleteBooking } from "@/lib/api/bookings";
 
-export async function deleteBookingAction(formData: FormData) {
- const id = formData.get("id") as string;
+export async function deleteBookingAction(bookingId: string) {
+  try {
+    await deleteBooking(bookingId);
+    return { success: true }
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Ismeretlen hiba";
 
- if (!id) {
-  throw new Error("Missing booking id");
- }
-
- await deleteBooking(id);
+    return { success: false, message}
+  }
 }
