@@ -1,9 +1,9 @@
-import { fetchBarbersAction } from "@/app/actions/fetchBarbers";
+import { getBarbers } from "@/lib/api/barbers";
 import BarbersList from "@/components/barbers/BarbersList";
 import "./barbers.scss";
 
 export default async function BarbersPage() {
-  const barbers = await fetchBarbersAction();
+  const barbers = await getBarbers();
 
   return (
     <main className="barbers-page">
