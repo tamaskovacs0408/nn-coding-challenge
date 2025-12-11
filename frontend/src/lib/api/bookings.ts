@@ -7,6 +7,10 @@ export async function getBookingsByEmail(email: string): Promise<Booking[]> {
   return data;
 }
 
+export async function getBookingsByBarber(barberId: string, date?: string) {
+  return apiFetch(`/api/booking?barberId=${barberId}${date ? `&date=${date}`: ""}`);
+}
+
 export async function createBooking(data: {
   email: string;
   barberId: string;
