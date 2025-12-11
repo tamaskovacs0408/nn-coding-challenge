@@ -1,0 +1,30 @@
+@use "../../../styles/variables" as v;
+@use "../../../styles/mixins" as m;
+
+.booking-page {
+  max-width: v.$container-max-width;
+  margin: 0 auto;
+  padding: 2rem;
+
+  @media screen and (min-width: 1800px) {
+    max-width: 1000px;
+  }
+
+  &__title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: v.$color-text;
+  }
+
+  &__error {
+    color: red;
+    margin-top: 1rem;
+  }
+
+  &__card {
+    background-color: v.$color-card;
+    padding: 2rem;
+    border-radius: 12px;
+    @include m.card-shadow;
+  }
+}
