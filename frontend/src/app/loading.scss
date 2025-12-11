@@ -1,0 +1,21 @@
+@use "../styles/variables" as v;
+@use "../styles/mixins" as m;
+
+.app-loading {
+  @include m.flex-center-col;
+  gap: 1rem;
+  height: 100vh;
+
+  color: v.$color-text;
+  opacity: 0.9;
+
+  &__spinner {
+    width: 40px;
+    height: 40px;
+    color: v.$color-accent;
+  }
+
+  &__text {
+    font-size: 1.8rem;
+  }
+}
