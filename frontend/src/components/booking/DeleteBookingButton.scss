@@ -1,0 +1,39 @@
+@use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
+
+.booking-delete-btn {
+  @include m.flex-center;
+  background: #cc4444;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  transition: 0.2s;
+
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+
+  &:hover {
+    background: #ff5555;
+    transform: scale(1.05);
+  }
+}
+
+.booking-delete-content {
+  color: v.$color-card;
+
+  button {
+    cursor: pointer;
+  }
+}
+
+.booking-delete-buttons {
+  button {
+    cursor: pointer;
+
+    &:first-child {
+      border: 1px solid v.$color-card;
+    }
+  }
+}
