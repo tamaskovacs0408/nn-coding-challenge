@@ -50,14 +50,17 @@ export default function BookingDateTimePicker({
         {isLoading && <p className='picker__loading'>Időpontok betöltése...</p>}
         {error && <p className='picker__error'>{error}</p>}
 
+        <h3 className='picker__subtitle'>Szabad időpontok:</h3>
+
         {!error && !isLoading && (
+          <>
           <div className='picker__slots'>
             {availableSlots.length === 0 && (
               <p className='picker__no-slots'>
                 Nincs szabad időpont a kiválasztott napon.
               </p>
             )}
-            <h3 className='picker__subtitle'>Szabad időpontok:</h3>
+            
             {availableSlots.map(slot => (
               <Button
                 key={slot}
@@ -70,7 +73,8 @@ export default function BookingDateTimePicker({
               </Button>
             ))}
 
-            {bookedSlots.length > 0 && (
+          </div>
+          {bookedSlots.length > 0 && (
               <div className="picker__booked">
                 <h3 className="picker__subtitle">Foglalt időpontok:</h3>
                 <div className="picker__booked-list">
@@ -80,8 +84,7 @@ export default function BookingDateTimePicker({
                 </div>
               </div>
             )}
-
-          </div>
+          </>
         )}
       </div>
     </div>
