@@ -1,13 +1,16 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
+import Link from "next/link";
 import { Scissors } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import "./Navbar.scss";
 
 export default function Navbar() {
   const pathname = usePathname();
+
+  const [open, setOpen] = useState(false);
 
   const navLinks = [
     { href: "/", label: "Kezdőlap" },
@@ -38,15 +41,40 @@ export default function Navbar() {
         </div>
 
         <div className='navbar__cta'>
-          <Link href='/bookings'>
+          <Link href='/barbers'>
             <Button variant='default'>Foglalás</Button>
           </Link>
         </div>
 
-        <button className='navbar__menu-button'>
+        <button className='navbar__menu-button' onClick={() => setOpen(!open)}>
           <Scissors size={22} />
         </button>
       </nav>
+
+      {open && (
+        <nav className='mobile-menu'>
+          {navLinks.map(link => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`mobile-menu__link ${
+                pathname === link.href ? "mobile-menu__link--active" : ""
+              }`}
+              onClick={() => setOpen(false)}
+            >
+              {link.label}
+            </Link>
+          ))}
+
+          <Link
+            href='/barbers'
+            className='mobile-menu__cta'
+            onClick={() => setOpen(false)}
+          >
+            Foglalás
+          </Link>
+        </nav>
+      )}
     </header>
   );
 }

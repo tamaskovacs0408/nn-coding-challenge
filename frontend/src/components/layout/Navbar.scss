@@ -58,9 +58,17 @@
     }
 
     &__cta {
-      cursor: pointer;
+      
       @media (max-width: v.$bp-md) {
         display: none;
+      }
+
+      button {
+        cursor: pointer;
+
+        &:hover {
+          background-color: v.$color-accent-hover;
+        }
       }
     }
 
@@ -72,5 +80,39 @@
         display: block;
       }
     }
+  }
+}
+
+.mobile-menu {
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: v.$color-card;
+  padding: 1.5rem;
+  width: 200px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+
+  @media screen and (min-width: v.$bp-md) {
+    display: none;
+  }
+
+  &__link {
+    color: v.$color-text;
+    text-decoration: none;
+    font-size: 1rem;
+
+    &--active {
+      color: v.$color-accent;
+      font-weight: 600;
+    }
+  }
+
+  &__button {
+    width: 100%;
   }
 }
