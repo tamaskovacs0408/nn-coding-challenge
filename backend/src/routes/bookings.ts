@@ -57,20 +57,56 @@ router.post("/", async (req, res) => {
  * @openapi
  * /api/booking:
  *   get:
- *     summary: Get bookings for a user by email
+ *     summary: Get bookings by email or barber
+ *     description: |
+ *       Returns bookings based on query parameters.
+ *
+ *       - If `email` is provided, returns all bookings for the given email.
+ *       - If `barberId` is provided, returns all bookings for that barber.
+ *       - If both `barberId` and `date` are provided, returns bookings for that barber on the given date.
+ *
+ *       At least one of `email` or `barberId` must be provided.
  *     tags:
  *       - Bookings
  *     parameters:
  *       - in: query
  *         name: email
- *         required: true
+ *         required: false
  *         schema:
  *           type: string
+ *       - in: query
+ *         name: barberId
+ *         required: false
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: date
+ *         required: false
+ *         schema:
+ *           type: string
+ *           format: date
  *     responses:
  *       200:
  *         description: List of bookings
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: string
+ *                   email:
+ *                     type: string
+ *                   barberId:
+ *                     type: string
+ *                   date:
+ *                     type: string
+ *                   time:
+ *                     type: string
  *       400:
- *         description: Missing email
+ *         description: Missing or invalid query parameters
  *       500:
  *         description: Internal server error
  */
