@@ -74,6 +74,15 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   if (err.message === "Time slot already booked") {
     return res.status(409).json({ message: err.message });
   }
+
+  if (err.message === "Booking not found") {
+    return res.status(404).json({ message: err.message });
+  }
+
+  if (err.message === "Id required") {
+    return res.status(400).json({ message: err.message });
+  }
+
   return res.status(500).json({ message: "Internal server error" });
 });
 
