@@ -1,8 +1,14 @@
 import { unstable_noStore as noStore } from 'next/cache';
 
+import { Metadata } from "next";
 import { getBarbers } from "@/lib/api/barbers";
 import BookingByBarberForm from "@/components/booking/BookingForm";
 import "./bookings.scss";
+
+export const metadata: Metadata = {
+  title: "Foglalás",
+  description: "Foglalás borbélyhoz",
+}
 
 export default async function BookingPage({
   params,
@@ -16,7 +22,7 @@ export default async function BookingPage({
     return (
       <section className='booking-page'>
         <h1 className='booking-page__title'>Foglalás</h1>
-        <p className='booking-page__error'>Hiányzó barberId paraméter.</p>
+        <p className='booking-page__error'>A borbély nem található.</p>
       </section>
     );
   }
