@@ -8,7 +8,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"], variable: '--font-inter', display: 'swap' });
 
 export const metadata: Metadata = {
-  title: "Barber Booking",
+  title: "BookABarber",
   description: "barber Booking application for NN coding challenge",
 };
 
@@ -24,7 +24,7 @@ export default function RootLayout({
       >
         <Navbar />
         {children}
-        <Toaster />
+        <Toaster position="top-center" richColors />
       </body>
     </html>
   );
