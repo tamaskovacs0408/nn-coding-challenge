@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Barber Booking – Frontend
 
-## Getting Started
+## Requirements
 
-First, run the development server:
+- **Node.js 18+**
+- Running **backend API** (separate repository)
+
+---
+
+## Installation
+
+```bash
+npm install
+```
+
+---
+
+## Environment Variables
+
+Create a `.env.local` file in the project root:
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:3001
+NEXT_PUBLIC_API_KEY=your_frontend_api_key
+```
+
+> ⚠️ The `NEXT_PUBLIC_` prefix is required because these values are accessible in the browser.
+
+---
+
+## Running the Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+By default, the app runs at:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Production Build
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+npm run start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Build Note
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Some pages use **dynamic data** (e.g., `/barbers`, `/bookings`). To ensure the build succeeds without the backend running, the following approach is used:
 
-## Deploy on Vercel
+```ts
+import { unstable_noStore as noStore } from "next/cache";
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+noStore();
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This ensures the build completes and the page works as SSR (Server-Side Rendering).
+
+---
+
+## Pages Overview
+
+| Route                  | Description                          |
+| ---------------------- | ------------------------------------ |
+| `/`                    | Landing page                         |
+| `/barbers`             | List of barbers                      |
+| `/bookings`            | List of bookings (filtered by email) |
+| `/bookings/[barberId]` | Create booking for a specific barber |
+
+---
+
+## State Management & Logic
+
+- **Server Actions**: Create and delete bookings
+- **Custom hooks**: Time slot logic (`useTimeSlots`)
+- **Backend validation + frontend feedback**
+- Handles holidays, Sundays, and past dates
+
+---
+
+## Tech Stack
+
+- **Next.js 16+** (App Router)
+- **React (latest, Next.js compatible)**
+- **TypeScript**
+- **SCSS (BEM methodology)**
+- **shadcn/ui** (UI components)
+- **Sonner** (toast notifications)
+- **lucide-react** (icons)
