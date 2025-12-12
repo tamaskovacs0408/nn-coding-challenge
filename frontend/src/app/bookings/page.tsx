@@ -45,6 +45,7 @@ export default async function BookingsPage({
           name='email'
           placeholder='pelda@email.com'
           className='booking-page__input'
+          required
         />
         <Button type='submit' className='booking-page__submit'>
           <Search size={18} /> Keresés
