@@ -153,16 +153,19 @@ router.get("/", async (req, res) => {
  *       500:
  *         description: Internal server error
  */
-router.delete("/:id", async (req, res) => {
-  const { id } = req.params;
+router.delete("/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
 
-  if (!id) {
-    return res.status(400).json({ message: "Id parameter is required" });
+    if (!id) {
+      throw new Error("Id required");
+    }
+
+    await deleteBooking(id);
+    return res.status(204).send();
+  } catch (error) {
+    next(error);
   }
-
-  await deleteBooking(id);
-
-  return res.status(204).send();
 });
 
 export default router;
