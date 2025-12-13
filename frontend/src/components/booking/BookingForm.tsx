@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useState, useEffect } from "react";
+import { useActionState, useState } from "react";
 import { createBookingAction } from "@/app/actions/createBooking";
 import { useRouter } from "next/navigation";
 import BookingFormField from "./BookingFormField";
@@ -24,8 +24,10 @@ export default function BookingForm({ barber }: { barber: Barber }) {
 
   const router = useRouter();
 
+  const isDisabled = !date || !time;
+
   if (state.success) {
-    toast.success("Sikieres foglalás!");
+    toast.success("Sikeres foglalás!");
 
     setTimeout(() => {
       router.push("/bookings");
@@ -38,7 +40,10 @@ export default function BookingForm({ barber }: { barber: Barber }) {
   }
 
   return (
-    <form action={formAction} className='booking-form'>
+    <form
+      action={formAction}
+      className='booking-form'
+    >
       <input type='hidden' name='barberId' value={barber.id} />
       <input type='hidden' name='date' value={date} />
       <input type='hidden' name='time' value={time} />
@@ -57,7 +62,11 @@ export default function BookingForm({ barber }: { barber: Barber }) {
         }}
       />
 
-      <Button type='submit' className='booking-form__submit'>
+      <Button
+        type='submit'
+        className='booking-form__submit'
+        disabled={isDisabled}
+      >
         Foglalás
       </Button>
     </form>
