@@ -6,8 +6,24 @@
   margin: 0 auto;
   padding: 2rem;
 
-  @media screen and (min-width: 1800px) {
+  @media screen and (min-width: v.$bp-xxl) {
     max-width: 1000px;
+  }
+
+   @media screen and (max-width: calc(v.$bp-xxl - 1px)) {
+    max-width: 50%;
+  }
+
+  @media screen and (max-width: v.$bp-xl) {
+    max-width: 70%;
+  }
+
+  @media screen and (max-width: v.$bp-lg) {
+    max-width: 90%;
+  }
+
+  @media screen and (max-width: v.$bp-sm) {
+    max-width: 100%;
   }
 
   &__title {
