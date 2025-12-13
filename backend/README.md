@@ -9,8 +9,6 @@
 
 ## Installation
 
-### Install Dependencies
-
 ```bash
 npm install
 ```
