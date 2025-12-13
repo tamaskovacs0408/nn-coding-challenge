@@ -12,3 +12,31 @@ export function generateSlots(openTime: number, closeTime: number) {
   }
   return slots;
 }
+
+export function isHoliday(holidays: string[],date: string,) {
+  return holidays.includes(date);
+}
+
+export function isSunday(date: string) {
+  return new Date(date).getDay() === 0;
+}
+
+export function isToday(date: string) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const selected = new Date(date);
+  selected.setHours(0, 0, 0, 0);
+
+  return selected.getTime() === today.getTime();
+}
+
+export function getNowMinutes() {
+  const now = new Date();
+  return now.getHours() * 60 + now.getMinutes();
+}
+
+export function toMinutes(slot: string) {
+  const [h, m] = slot.split(":").map(Number);
+  return h * 60 + m;
+}
