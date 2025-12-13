@@ -52,6 +52,10 @@
   &__slot-btn {
     min-width: 70px;
     cursor: pointer;
+
+    &--selected {
+      border: 1px solid v.$color-text;
+    }
   }
 
   &__booked {

@@ -74,7 +74,7 @@ export default function BookingDateTimePicker({
                   key={slot}
                   type='button'
                   variant={selectedTime === slot ? "default" : "outline"}
-                  className='picker__slot-btn'
+                  className={`picker__slot-btn${selectedTime === slot ? "--selected" : ""}`}
                   onClick={() => handleSelect(slot)}
                 >
                   {slot}
