@@ -1,13 +1,19 @@
 "use client";
 
 import { useEffect, useState, useMemo } from "react";
-import { getBookingsByBarber } from "@/lib/api/bookings";
-import { generateSlots, isHoliday, isSunday, isToday, toMinutes, getNowMinutes } from "@/lib/utils";
+import {
+  generateSlots,
+  isHoliday,
+  isSunday,
+  isToday,
+  toMinutes,
+  getNowMinutes,
+} from "@/lib/utils";
 import type { Booking } from "@/types/booking";
 import holidays from "@/data/holidays.json";
 
 const OPEN_TIME = 7;
-const CLOSE_TIME= 20;
+const CLOSE_TIME = 20;
 
 export function useTimeSlots(barberId: string, date: string) {
   const [bookedSlots, setBookedSlots] = useState<string[]>([]);
@@ -20,20 +26,19 @@ export function useTimeSlots(barberId: string, date: string) {
 
     const allSlots = generateSlots(OPEN_TIME, CLOSE_TIME);
 
-    let freeSlots = allSlots.filter((slot) => !bookedSlots.includes(slot));
+    let freeSlots = allSlots.filter(slot => !bookedSlots.includes(slot));
 
-    if(isToday(date)) {
+    if (isToday(date)) {
       const now = getNowMinutes();
-      freeSlots = freeSlots.filter((freeSlot) => toMinutes(freeSlot) > now);
+      freeSlots = freeSlots.filter(freeSlot => toMinutes(freeSlot) > now);
     }
 
     return freeSlots;
-
-  }, [date, bookedSlots])
+  }, [date, bookedSlots]);
 
   useEffect(() => {
     setSelectedTime("");
-  }, [date])
+  }, [date]);
 
   useEffect(() => {
     if (!barberId || !date) return;
@@ -43,22 +48,30 @@ export function useTimeSlots(barberId: string, date: string) {
         setIsLoading(true);
         setError(null);
 
-        if(isHoliday(holidays, date)) {
+        if (isHoliday(holidays, date)) {
           setBookedSlots([]);
           setError("Ünnepnapokon zárva");
           return;
-        };
+        }
 
-        if(isSunday(date)) {
+        if (isSunday(date)) {
           setBookedSlots([]);
           setError("Vasárnap zárva");
           return;
         }
-        
-        const bookings = await getBookingsByBarber(barberId, date);
+
+        const proxyUrl = `/api/proxy/bookings?barberId=${encodeURIComponent(
+          barberId
+        )}${date ? `&date=${encodeURIComponent(date)}` : ""}`;
+
+        const res = await fetch(proxyUrl, { cache: "no-store" });
+        if (!res.ok) {
+          throw new Error(`Failed to load bookings (status ${res.status})`);
+        }
+
+        const bookings: Booking[] = await res.json();
         const alreadyBooked = bookings.map((booking: Booking) => booking.time);
         setBookedSlots(alreadyBooked);
-
       } catch (err) {
         console.error(err);
         setError("Nem sikerült lekérni az időpontokat.");
