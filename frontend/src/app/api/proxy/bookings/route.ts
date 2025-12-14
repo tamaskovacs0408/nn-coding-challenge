@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
-const API_KEY = process.env.API_KEY || process.env.NEXT_PUBLIC_API_KEY || "";
+const API_KEY = process.env.API_KEY || "";
 
 export async function GET(req: Request) {
   try {
