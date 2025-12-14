@@ -21,7 +21,8 @@ Create a `.env.local` file in the project root:
 
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:3001
-NEXT_PUBLIC_API_KEY=your_frontend_api_key
+NEXT_PUBLIC_API_KEY=your_backend_api_key
+API_KEY=your_backend_api_key
 ```
 
 > ⚠️ The `NEXT_PUBLIC_` prefix is required because these values are accessible in the browser.
