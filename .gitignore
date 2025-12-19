@@ -49,6 +49,7 @@ Thumbs.db
 
 # IDE / editor files
 .vscode/
+.github/
 
 # Coverage
 coverage/
