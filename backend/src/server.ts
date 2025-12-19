@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import { authenticate } from "./middlewares/auth.js";
 import barbersRouter from "./routes/barbers.js";
 import bookingsRouter from "./routes/bookings.js";
+import publicHolidayRouter from "./routes/publicHolidays.js"
 import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "./swagger.js";
 
@@ -26,6 +27,8 @@ app.get("/health", (req, res) => {
 });
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+app.use("/api/public-holidays", publicHolidayRouter);
 
 app.use(authenticate);
 
