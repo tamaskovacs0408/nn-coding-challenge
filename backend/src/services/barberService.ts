@@ -1,23 +1,4 @@
-interface WorkHours {
-  start: string;
-  end: string;
-}
-
-export interface WorkSchedule {
-  monday: WorkHours;
-  tuesday: WorkHours;
-  wednesday: WorkHours;
-  thursday: WorkHours;
-  friday: WorkHours;
-  saturday: WorkHours;
-  sunday: WorkHours;
-}
-
-interface Barber {
-  id: string;
-  name: string;
-  workSchedule: WorkSchedule;
-}
+import type { Barber } from "../types/barbers.ts";
 
 async function fetchBarbers(): Promise<Barber[]> {
   const url = process.env.BARBER_API_URL!;

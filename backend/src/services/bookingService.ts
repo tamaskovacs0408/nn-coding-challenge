@@ -4,27 +4,9 @@ import { fileURLToPath } from "url";
 import { join, dirname } from "path";
 import fetchBarbers from "./barberService.js";
 import { apiFetch } from "../lib/utils.ts";
-import type { WorkSchedule } from "./barberService.js";
-
-interface Booking {
-  id: string;
-  email: string;
-  barberId: string;
-  date: string;
-  time: string;
-}
-
-interface PublicHolidays {
-  date: string;
-  localName: string;
-  name: string;
-  countryCode: string;
-  fixed: false;
-  global: true;
-  countries: null;
-  launchYear: null;
-  types: string[];
-}
+import type { WorkSchedule } from "../types/barbers.ts";
+import type { PublicHolidays } from "../types/publicHolidays.ts";
+import type { Booking } from "../types/bookings.ts";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
