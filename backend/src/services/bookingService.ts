@@ -3,7 +3,7 @@ import { randomUUID } from "crypto";
 import { fileURLToPath } from "url";
 import { join, dirname } from "path";
 import fetchBarbers from "./barberService.js";
-import { apiFetch } from "../lib/utils.ts";
+import { apiFetch } from "../lib/utils.js";
 import type { WorkSchedule } from "../types/barbers.ts";
 import type { PublicHolidays } from "../types/publicHolidays.ts";
 import type { Booking } from "../types/bookings.ts";

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import fetchPublicHolidays from "../services/publicHolidayService.ts";
+import fetchPublicHolidays from "../services/publicHolidayService.js";
 
 const router = Router();
 
