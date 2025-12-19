@@ -3,7 +3,7 @@ import { randomUUID } from "crypto";
 import { fileURLToPath } from "url";
 import { join, dirname } from "path";
 import fetchBarbers from "./barberService.js";
-import holidays from "../data/holidays.json" with { type: "json"};
+import { apiFetch } from "../lib/utils.ts";
 import type { WorkSchedule } from "./barberService.js";
 
 interface Booking {
@@ -12,6 +12,18 @@ interface Booking {
   barberId: string;
   date: string;
   time: string;
+}
+
+interface PublicHolidays {
+  date: string;
+  localName: string;
+  name: string;
+  countryCode: string;
+  fixed: false;
+  global: true;
+  countries: null;
+  launchYear: null;
+  types: string[];
 }
 
 const __filename = fileURLToPath(import.meta.url);
@@ -76,13 +88,19 @@ export async function createBooking(bookingData: {
       booking.time === time
   );
 
-  if (holidays.includes(date)) {
-    throw new Error("Cannot book on holidays")
-  }
+  const currentYear = date.slice(0, 4);
+
+  const publicHolidays: PublicHolidays[] = await apiFetch(
+    `${process.env.PUBLIC_HOLIDAY_API_URL}/${currentYear}/HU`
+  );
+
+  publicHolidays.map(holiday => {
+    if (holiday.date === date) throw new Error("Cannot book on holidays");
+  });
 
   const weekday = bookingDate.getDay();
   if (weekday === 0) {
-    throw new Error("Cannot book on Sundays")
+    throw new Error("Cannot book on Sundays");
   }
 
   if (isNaN(bookingDate.getTime())) throw new Error("Invalid datetime");
