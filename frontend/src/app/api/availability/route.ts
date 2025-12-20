@@ -32,9 +32,6 @@ export async function GET(req: Request) {
       holidaysResponse
     ]);
 
-    console.log("slots", slots);
-    console.log("holidays", holidays);
-
     const isHoliday = holidays.some((holiday: { date: string}) => holiday.date === date);
 
     return Response.json({
