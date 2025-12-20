@@ -1,20 +1,16 @@
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
-// use server-only key on server, NEXT_PUBLIC on client
-const API_KEY =
-  typeof window === "undefined"
-    ? process.env.API_KEY || ""
-    : process.env.NEXT_PUBLIC_API_KEY || "";
+const BASE_URL = process.env.API_URL || "http://localhost:3001";
+const API_KEY =  process.env.API_KEY || "";
 
 export async function apiFetch(path: string, options: RequestInit = {}) {
   const url = `${BASE_URL}${path}`;
 
   const response = await fetch(url, {
-    method: options.method || "GET",
+    ...options,
     headers: {
       "Content-Type": "application/json",
-      "x-api-key": API_KEY,
+      ...(options.headers ?? {}),
+      ...(API_KEY ? { 'x-api-key': API_KEY}: {})
     },
-    body: options.body,
   });
 
   if (!response.ok) {
