@@ -3,14 +3,12 @@
 import { useEffect, useState, useMemo } from "react";
 import {
   generateSlots,
-  isHoliday,
   isSunday,
   isToday,
   toMinutes,
   getNowMinutes,
 } from "@/lib/utils";
 import type { Booking } from "@/types/booking";
-import holidays from "@/data/holidays.json";
 
 const OPEN_TIME = 7;
 const CLOSE_TIME = 20;
@@ -18,11 +16,12 @@ const CLOSE_TIME = 20;
 export function useTimeSlots(barberId: string, date: string) {
   const [bookedSlots, setBookedSlots] = useState<string[]>([]);
   const [selectedTime, setSelectedTime] = useState("");
+  const [isHoliday, setIsHoliday] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const availableSlots = useMemo(() => {
-    if (isHoliday(holidays, date) || isSunday(date)) return [];
+    if (isHoliday || isSunday(date)) return [];
 
     const allSlots = generateSlots(OPEN_TIME, CLOSE_TIME);
 
@@ -34,7 +33,7 @@ export function useTimeSlots(barberId: string, date: string) {
     }
 
     return freeSlots;
-  }, [date, bookedSlots]);
+  }, [isHoliday, date, bookedSlots]);
 
   useEffect(() => {
     setSelectedTime("");
@@ -48,7 +47,24 @@ export function useTimeSlots(barberId: string, date: string) {
         setIsLoading(true);
         setError(null);
 
-        if (isHoliday(holidays, date)) {
+        const res = await fetch(
+          `/api/availability?barberId=${encodeURIComponent(barberId)}${
+            date ? `&date=${encodeURIComponent(date)}` : ""
+          }`
+        );
+
+        if (!res.ok) {
+          throw new Error("Failed to load availability");
+        }
+
+        const data: {
+          slots: Booking[];
+          isHoliday: boolean;
+        } = await res.json();
+
+        setIsHoliday(data.isHoliday);
+
+        if (data.isHoliday) {
           setBookedSlots([]);
           setError("Ünnepnapokon zárva");
           return;
@@ -60,17 +76,9 @@ export function useTimeSlots(barberId: string, date: string) {
           return;
         }
 
-        const proxyUrl = `/api/proxy/bookings?barberId=${encodeURIComponent(
-          barberId
-        )}${date ? `&date=${encodeURIComponent(date)}` : ""}`;
-
-        const res = await fetch(proxyUrl, { cache: "no-store" });
-        if (!res.ok) {
-          throw new Error(`Failed to load bookings (status ${res.status})`);
-        }
-
-        const bookings: Booking[] = await res.json();
-        const alreadyBooked = bookings.map((booking: Booking) => booking.time);
+        const alreadyBooked = data.slots.map(
+          (booking: Booking) => booking.time
+        );
         setBookedSlots(alreadyBooked);
       } catch (err) {
         console.error(err);
