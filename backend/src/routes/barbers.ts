@@ -1,5 +1,5 @@
 import { Router } from "express";
-import fetchBarbers from "../services/barberService.js";
+import getBarbers from "../services/barberService.js";
 
 const router = Router();
 
@@ -17,7 +17,7 @@ const router = Router();
  *         description: Internal server error
  */
 router.get('/', async (req, res) => {
-  const barbers = await fetchBarbers();
+  const barbers = await getBarbers();
   res.status(200).json(barbers);
 
 })
