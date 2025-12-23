@@ -17,13 +17,11 @@ npm install
 
 ## Environment Variables
 
-Create a `.env` file in the project root based on `.env.example`:
+Create a `.env` file in the project root:
 
 ```env
 PORT=3001
 API_KEY=your-backend-api-key
-BARBER_API_URL=barber-api-url
-BARBER_API_KEY=your-barber-api-key
 ```
 
 ### Variable Reference
