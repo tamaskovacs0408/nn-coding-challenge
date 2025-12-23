@@ -1,4 +1,4 @@
-import { unstable_noStore as noStore } from 'next/cache';
+"use cache";
 
 import { Metadata } from "next";
 import { getBarbers } from "@/lib/api/barbers";
@@ -11,7 +11,6 @@ export const metadata: Metadata = {
 }
 
 export default async function BarbersPage() {
-  noStore();
   const barbers = await getBarbers();
 
   return (
