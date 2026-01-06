@@ -29,10 +29,10 @@ export default function DeleteBookingButton({
     const response = await deleteBookingAction(bookingId);
 
     if (response.success) {
-      toast.success("Foglalás sikeresen törölve.");
+      toast.success("Booking successfully deleted.");
       router.refresh();
     } else {
-      toast.error(response.message || "Hiba történt a foglalás törlése során.");
+      toast.error(response.message || "An error occurred while deleting the booking.");
     }
   }
 
@@ -45,14 +45,14 @@ export default function DeleteBookingButton({
       </DialogTrigger>
       <DialogContent className="booking-delete-content">
         <DialogHeader>
-          <DialogTitle>Biztosan törlöd a foglalást?</DialogTitle>
+          <DialogTitle>Are you sure you want to delete the booking?</DialogTitle>
         </DialogHeader>
-        <p>Ez a művelete nem vonható vissza.</p>
+        <p>This action cannot be undone.</p>
         <DialogFooter className="booking-delete-buttons">
           <DialogClose asChild>
-            <Button variant="secondary">Mégsem</Button>
+            <Button variant="secondary">Cancel</Button>
           </DialogClose>
-          <Button variant="destructive" onClick={handleDelete}>Törlés</Button>
+          <Button variant="destructive" onClick={handleDelete}>Delete</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

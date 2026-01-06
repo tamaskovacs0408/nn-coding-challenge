@@ -8,32 +8,32 @@ export default function HomePage() {
   return (
     <main className='home'>
       <section className='home__hero'>
-        <h1 className='home__title'>Foglalj időpontot egyszerűen!</h1>
+        <h1 className='home__title'>Book an appointment easily!</h1>
         <p className='home__subtitle'>
-          Válaszd ki kedvenc borbélyodat és foglalj azonnal!
+          Choose your favorite barber and book instantly!
         </p>
 
         <Link href='/barbers' className='home__cta'>
-          Foglalj most!
+          Book now!
         </Link>
       </section>
 
       <section className='home__features'>
-        <FeatureCard icon={Scissors} text='Profi borbélyok' />
-        <FeatureCard icon={Calendar} text='Gyors foglalás' />
-        <FeatureCard icon={Clock} text='Rugalmas időpontok' />
-        <FeatureCard icon={Star} text='Minőségi szolgáltatás' />
+        <FeatureCard icon={Scissors} text='Professional barbers' />
+        <FeatureCard icon={Calendar} text='Fast booking' />
+        <FeatureCard icon={Clock} text='Flexible time slots' />
+        <FeatureCard icon={Star} text='Quality service' />
       </section>
 
       <section className='home__actions'>
         <ActionCard
-          title='Új foglalás'
-          btnTitle='Borbély kiválasztása'
+          title='New booking'
+          btnTitle='Choose a barber'
           url='/barbers'
         />
         <ActionCard
-          title='Foglalásaim'
-          btnTitle='Foglalások megtekintése'
+          title='My bookings'
+          btnTitle='View bookings'
           url='/bookings'
         />
       </section>

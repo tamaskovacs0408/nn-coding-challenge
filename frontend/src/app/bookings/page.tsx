@@ -10,8 +10,8 @@ import { Search, Calendar, Clock, Mail, Trash2 } from "lucide-react";
 import "./bookings.scss";
 
 export const metadata: Metadata = {
-  title: "Foglalások",
-  description: "Foglalások megtekintése",
+  title: "Bookings",
+  description: "View bookings",
 };
 
 export default async function BookingsPage({
@@ -34,33 +34,33 @@ export default async function BookingsPage({
 
   return (
     <main className='booking-page'>
-      <h1 className='booking-page__title'>Foglalásaim</h1>
+      <h1 className='booking-page__title'>My bookings</h1>
       <p className='booking-page__subtitle'>
-        Add meg az email címed a foglalások megtekintéséhez
+        Enter your email address to view your bookings
       </p>
 
       <form className='booking-page__search'>
         <Input
           type='email'
           name='email'
-          placeholder='pelda@email.com'
+          placeholder='example@email.com'
           className='booking-page__input'
           required
         />
         <Button type='submit' className='booking-page__submit'>
-          <Search size={18} /> Keresés
+          <Search size={18} /> Search
         </Button>
       </form>
 
       {hasSearch && (
         <Button className="booking-page__reset">
-          <Link href="/bookings">Új keresés</Link>
+          <Link href="/bookings">New search</Link>
         </Button>
       )}
 
       {hasSearch && !hasResults && (
         <p className="booking-page__subtitle">
-          Nincs foglalás a megadott email címre.
+          No bookings found for the provided email address.
         </p>
       )}
 

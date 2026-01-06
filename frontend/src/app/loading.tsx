@@ -5,7 +5,7 @@ export default function Loading() {
   return (
     <section className="app-loading">
       <Spinner className="app-loading__spinner" />
-      <p className="app-loading__text">Betöltés...</p>
+      <p className="app-loading__text">Loading...</p>
     </section>
   )
 }

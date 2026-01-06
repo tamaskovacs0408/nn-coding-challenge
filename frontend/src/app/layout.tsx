@@ -14,7 +14,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "BookABarber",
-  description: "barber Booking application for NN coding challenge",
+  description: "Barber Booking application",
 };
 
 export default function RootLayout({

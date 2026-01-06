@@ -6,8 +6,8 @@ import BarbersList from "@/components/barbers/BarbersList";
 import "./barbers.scss";
 
 export const metadata: Metadata = {
-  title: "Borbélyaink",
-  description: "Borbélyaink megtekintése",
+  title: "Our Barbers",
+  description: "Check our barbers",
 }
 
 export default async function BarbersPage() {
@@ -15,7 +15,7 @@ export default async function BarbersPage() {
 
   return (
     <main className="barbers-page">
-      <h1 className="barbers-page__title">Borbélyaink</h1>
+      <h1 className="barbers-page__title">Our Barbers</h1>
       <BarbersList barbers={barbers} />
     </main>
   );

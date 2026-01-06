@@ -66,13 +66,13 @@ export function useTimeSlots(barberId: string, date: string) {
 
         if (data.isHoliday) {
           setBookedSlots([]);
-          setError("Ünnepnapokon zárva");
+          setError("Closed on holidays");
           return;
         }
 
         if (isSunday(date)) {
           setBookedSlots([]);
-          setError("Vasárnap zárva");
+          setError("Closed on Sunday");
           return;
         }
 
@@ -82,7 +82,7 @@ export function useTimeSlots(barberId: string, date: string) {
         setBookedSlots(alreadyBooked);
       } catch (err) {
         console.error(err);
-        setError("Nem sikerült lekérni az időpontokat.");
+        setError("Unable to retrieve slots.");
       } finally {
         setIsLoading(false);
       }
@@ -93,7 +93,7 @@ export function useTimeSlots(barberId: string, date: string) {
 
   useEffect(() => {
     if (isToday(date) && availableSlots.length === 0) {
-      setError("A mai napra már nincs szabad időpont.");
+      setError("There are no available slots for today.");
     }
   }, [date, availableSlots]);
 

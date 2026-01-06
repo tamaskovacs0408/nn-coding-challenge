@@ -35,7 +35,7 @@ export default function BookingDateTimePicker({
   return (
     <div className='picker'>
       <div className='picker__field'>
-        <Label>Dátum</Label>
+        <Label>Date</Label>
         <Input
           type='date'
           className='picker__input'
@@ -51,7 +51,7 @@ export default function BookingDateTimePicker({
         {isLoading && (
           <p className='picker__loading'>
             <Spinner />
-            Időpontok betöltése...
+            Loading time slots...
           </p>
         )}
 
@@ -61,11 +61,11 @@ export default function BookingDateTimePicker({
 
         {!error && !isLoading && (
           <>
-            <h3 className='picker__subtitle'>Szabad időpontok:</h3>
+            <h3 className='picker__subtitle'>Available slots:</h3>
             <div className='picker__slots'>
               {availableSlots.length === 0 && (
                 <p className='picker__no-slots'>
-                  Nincs szabad időpont a kiválasztott napon.
+                  No available slots on the selected day.
                 </p>
               )}
 
@@ -83,7 +83,7 @@ export default function BookingDateTimePicker({
             </div>
             {bookedSlots.length > 0 && (
               <div className='picker__booked'>
-                <h3 className='picker__subtitle'>Foglalt időpontok:</h3>
+                <h3 className='picker__subtitle'>Booked slots:</h3>
                 <div className='picker__booked-list'>
                   {bookedSlots.map(bookedSlot => (
                     <span key={bookedSlot} className='picker__booked-item'>

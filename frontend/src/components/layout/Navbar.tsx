@@ -13,9 +13,9 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   const navLinks = [
-    { href: "/", label: "Kezdőlap" },
-    { href: "/barbers", label: "Borbélyok" },
-    { href: "/bookings", label: "Foglalásaim" },
+    { href: "/", label: "Home" },
+    { href: "/barbers", label: "Barbers" },
+    { href: "/bookings", label: "Bookings" },
   ];
 
   return (
@@ -42,12 +42,13 @@ export default function Navbar() {
 
         <div className='navbar__cta'>
           <Link href='/barbers'>
-            <Button variant='default'>Foglalás</Button>
+            <Button variant='default'>Book</Button>
           </Link>
         </div>
 
         <button className='navbar__menu-button' onClick={() => setOpen(!open)}>
           <Scissors size={22} />
+          Menu
         </button>
       </nav>
 
@@ -71,7 +72,7 @@ export default function Navbar() {
             className='mobile-menu__cta'
             onClick={() => setOpen(false)}
           >
-            Foglalás
+            Book
           </Link>
         </nav>
       )}

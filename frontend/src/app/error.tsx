@@ -20,13 +20,13 @@ export default function ErrorPage({
       <Card className="error-page__card">
         <CardHeader>
           <CardTitle className="error-page__title">
-            Váratlan hiba történt
+            Unexpected error happened
           </CardTitle>
         </CardHeader>
         <CardContent>
           <p className="error-page__text">
-            Váratlan hiba történt az oldal betöltése közben.
-            Próbáld újra, vagy térj vissza a főoldalra.
+            An unexpected error happened while loading the page.
+            Please try again or return to the home page
           </p>
 
           <p className="error-page__debug">
@@ -35,11 +35,11 @@ export default function ErrorPage({
 
           <div className="error-page__actions">
             <Button onClick={() => reset()}>
-              Újrapróbálom
+              Try again
             </Button>
 
             <Button variant="secondary" onClick={() => router.push("/")}>
-              Főoldal
+              Home page
             </Button>
 
           </div>

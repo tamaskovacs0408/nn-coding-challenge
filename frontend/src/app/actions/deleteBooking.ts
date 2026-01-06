@@ -7,7 +7,7 @@ export async function deleteBookingAction(bookingId: string) {
     await deleteBooking(bookingId);
     return { success: true }
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Ismeretlen hiba";
+    const message = error instanceof Error ? error.message : "Unknown error";
 
     return { success: false, message}
   }

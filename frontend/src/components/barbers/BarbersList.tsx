@@ -6,12 +6,12 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import "./BarbersList.scss";
 
 const translatedDays: Record<string, string> = {
-  monday: "Hétfő",
-  tuesday: "Kedd",
-  wednesday: "Szerda",
-  thursday: "Csütörtök",
-  friday: "Péntek",
-  saturday: "Szombat",
+  monday: "Monday",
+  tuesday: "Tuesday",
+  wednesday: "Wednesday",
+  thursday: "Thursday",
+  friday: "Friday",
+  saturday: "Saturday",
 }
 
 export default function BarbersList({ barbers }: { barbers: Barber[] }) {
@@ -26,7 +26,7 @@ export default function BarbersList({ barbers }: { barbers: Barber[] }) {
           </CardHeader>
 
           <CardContent>
-            <p className="barbers-list__hours-label">Nyitvatartás:</p>
+            <p className="barbers-list__hours-label">Opening hours:</p>
             <ul className="barbers-list__hours">
               {Object.entries(barber.workSchedule).map(([day, hours]) => (
                 <li key={day} className="barbers-list__hours-item">
@@ -41,7 +41,7 @@ export default function BarbersList({ barbers }: { barbers: Barber[] }) {
               href={`/bookings/${barber.id}`}
               className="barbers-list__cta"
             >
-              Időpont foglalás
+              Book appointment
             </Link>
           </CardContent>
         </Card>

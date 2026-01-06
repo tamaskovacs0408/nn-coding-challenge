@@ -27,7 +27,7 @@ export default function BookingForm({ barber }: { barber: Barber }) {
   const isDisabled = !date || !time;
 
   if (state.success) {
-    toast.success("Sikeres foglalás!");
+    toast.success("Successful booking!");
 
     setTimeout(() => {
       router.push("/bookings");
@@ -35,7 +35,7 @@ export default function BookingForm({ barber }: { barber: Barber }) {
   }
 
   if (state.error) {
-    toast.error("Hiba történt a foglalás során.");
+    toast.error("An error occurred during booking.");
     console.error(state.error);
   }
 
@@ -67,7 +67,7 @@ export default function BookingForm({ barber }: { barber: Barber }) {
         className='booking-form__submit'
         disabled={isDisabled}
       >
-        Foglalás
+        Book
       </Button>
     </form>
   );

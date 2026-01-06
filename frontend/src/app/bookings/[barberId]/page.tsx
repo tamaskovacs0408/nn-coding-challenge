@@ -6,8 +6,8 @@ import BookingByBarberForm from "@/components/booking/BookingForm";
 import "./bookings.scss";
 
 export const metadata: Metadata = {
-  title: "Foglalás",
-  description: "Foglalás borbélyhoz",
+  title: "Booking",
+  description: "Book a barber",
 }
 
 export default async function BookingPage({
@@ -21,8 +21,8 @@ export default async function BookingPage({
   if (!barberId) {
     return (
       <section className='booking-page'>
-        <h1 className='booking-page__title'>Foglalás</h1>
-        <p className='booking-page__error'>A borbély nem található.</p>
+        <h1 className='booking-page__title'>Booking</h1>
+        <p className='booking-page__error'>Barber not found.</p>
       </section>
     );
   }
@@ -33,15 +33,15 @@ export default async function BookingPage({
   if (!barber) {
     return (
       <section className='booking-page'>
-        <h1 className='booking-page__title'>Foglalás</h1>
-        <p className='booking-page__error'>A borbély nem található.</p>
+        <h1 className='booking-page__title'>Booking</h1>
+        <p className='booking-page__error'>Barber not found.</p>
       </section>
     );
   }
 
   return (
     <section className='booking-page'>
-      <h1 className='booking-page__title'>Foglalás: {barber.name}</h1>
+      <h1 className='booking-page__title'>Booking: {barber.name}</h1>
 
       <div className='booking-page__card'>
         <BookingByBarberForm barber={barber} />
