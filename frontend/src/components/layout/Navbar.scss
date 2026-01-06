@@ -10,6 +10,10 @@
   justify-content: space-between;
   align-items: center;
 
+  @media screen and (max-width: v.$bp-xs) {
+    padding: 1rem;
+  }
+
   &__logo {
     display: flex;
     align-items: center;
@@ -78,7 +82,8 @@
       color: v.$color-accent;
 
       @media (max-width: v.$bp-md) {
-        display: block;
+        display: flex;
+        gap: .25rem;
       }
     }
   }
